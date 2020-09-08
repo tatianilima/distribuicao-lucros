@@ -9,4 +9,9 @@
 		<PackageReference Include="NSwag.Core" Version="13.1.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Distribuicao.Lucros.Domain\Distribuicao.Lucros.Domain.csproj" />
+	  <ProjectReference Include="..\Distribuicao.Lucros.Infra.Ioc\Distribuicao.Lucros.Infra.Ioc.csproj" />
+	</ItemGroup>
 </Project>

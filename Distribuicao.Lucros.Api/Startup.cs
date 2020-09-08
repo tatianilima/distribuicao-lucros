@@ -1,3 +1,4 @@
+using Distribuicao.Lucros.Infra.Ioc.DependencyInjections;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,9 @@ namespace Distribuicao.Lucros.Api
                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddControllers();
+
+            DependencyInjections.AddInfraStructure(services, Configuration);
+
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>

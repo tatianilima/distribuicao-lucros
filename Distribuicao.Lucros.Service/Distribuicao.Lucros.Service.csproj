@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Distribuicao.Lucros.Domain\Distribuicao.Lucros.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
