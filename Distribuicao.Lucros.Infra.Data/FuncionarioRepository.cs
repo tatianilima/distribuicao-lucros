@@ -20,7 +20,7 @@ namespace Distribuicao.Lucros.Infra.Data
         {
             string query = @"
                 select 
-	                matricula,
+                    matricula,
                     nome,
                     area,
                     cargo,

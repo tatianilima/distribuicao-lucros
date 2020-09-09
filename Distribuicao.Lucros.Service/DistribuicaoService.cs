@@ -35,13 +35,14 @@ namespace Distribuicao.Lucros.Service
                 });
             }
 
+            double saldo = data.valor_maximo_distribuicao - bonusTotal;
             return new DistribuicaoResponse()
             {
                 Participacoes = participacoes,
                 total_de_funcionarios = funcionarios.Count,
-                total_distribuido = bonusTotal,
-                total_disponibilizado = data.valor_maximo_distribuicao,
-                saldo_total_disponibilizado = data.valor_maximo_distribuicao - bonusTotal
+                total_distribuido = Math.Round(bonusTotal,2),
+                total_disponibilizado = Math.Round(data.valor_maximo_distribuicao, 2), 
+                saldo_total_disponibilizado = Math.Round(saldo, 2)
             };
         }
 
@@ -51,8 +52,9 @@ namespace Distribuicao.Lucros.Service
             double sb = funcionario.salario_bruto;
 
             int pta = ObterPesoPorTempoAdmissao(funcionario.data_de_admissao);
-            int paa = ObterPesoPorArea(todasAreas, funcionario.cargo);
-            int pfs = ObterPesoPorSalario(sb, funcionario.cargo);
+            int paa = ObterPesoPorArea(todasAreas, funcionario.area);
+            float fs = CalcularFaixaSalarial(sb);
+            int pfs = ObterPesoPorSalario(fs, funcionario.cargo);
 
             return Math.Round((((sb * pta) + (sb * paa)) / pfs) * 12, 2);            
         }
@@ -70,26 +72,30 @@ namespace Distribuicao.Lucros.Service
             return areas;
         }
 
-        private int ObterPesoPorSalario(double salarioBruto, string cargo)
+        private int ObterPesoPorSalario(float faixaSalarial, string cargo)
         {
             int peso = 0;
-            if (cargo=="Estagiário" || salarioBruto <= (salarioMinimo*3))
+            if (cargo=="Estagiário" || faixaSalarial <= 3)
             {
                 peso = 1;
-            }else if (salarioBruto > (salarioMinimo*3) && salarioBruto < (salarioMinimo*5))
+            }else if (faixaSalarial > 3 && faixaSalarial <=5)
             {
                 peso = 2;
             }
-            else if (salarioBruto > (salarioMinimo * 5) && salarioBruto < (salarioMinimo * 8))
+            else if (faixaSalarial > 5 && faixaSalarial <= 8)
             {
                 peso = 3;
             }
-            else if(salarioBruto > (salarioMinimo*8))
+            else if(faixaSalarial > 8)
             {
                 peso = 5;
             }
 
             return peso;
+        }
+        public int CalcularFaixaSalarial(double salarioBruto)
+        {
+            return (int)Math.Round(salarioBruto / salarioMinimo);
         }
 
         private int ObterPesoPorArea(Dictionary<string, int> todasAreas,string areaAtuacao) 
@@ -105,11 +111,11 @@ namespace Distribuicao.Lucros.Service
             {
                 peso = 1;
             }
-            else if(tempoDeCasa > 1 && tempoDeCasa < 3)
+            else if(tempoDeCasa > 1 && tempoDeCasa <= 3)
             {
                 peso = 2;
             }
-            else if(tempoDeCasa > 3 && tempoDeCasa< 8)
+            else if(tempoDeCasa > 3 && tempoDeCasa<= 8)
             {
                 peso = 3;
             }else if (tempoDeCasa > 8)
