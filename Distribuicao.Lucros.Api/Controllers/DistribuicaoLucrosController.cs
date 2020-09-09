@@ -23,7 +23,7 @@ namespace Distribuicao.Lucros.Api.Controllers
         {
             try
             {
-                var response = _distribuicaoService.Calcular(data);
+                var response = _distribuicaoService.ObterBonus(data);
                 return Created("", response);
             }
             catch (Exception ex)

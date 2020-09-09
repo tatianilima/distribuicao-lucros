@@ -5,6 +5,6 @@ namespace Distribuicao.Lucros.Domain.Interfaces.Services
 {
     public interface IDistribuicaoService
     {
-        DistribuicaoResponse Calcular(DistribuicaoRequest data);
+        DistribuicaoResponse ObterBonus(DistribuicaoRequest data);
     }
 }

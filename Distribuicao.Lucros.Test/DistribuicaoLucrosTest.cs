@@ -14,14 +14,14 @@ namespace Distribuicao.Lucros.Test
         [SetUp]
         public void SetUp()
         {
-            distribuicaoService = new DistribuicaoService();
+            //distribuicaoService = new DistribuicaoService();
         }
 
         [Test]
         public void Success()
         {
             var data = new DistribuicaoRequest();
-            DistribuicaoResponse distribuicaoLucros = distribuicaoService.Calcular(data);
+            DistribuicaoResponse distribuicaoLucros = distribuicaoService.ObterBonus(data);
             Assert.AreEqual(distribuicaoLucros.GetType(), typeof(DistribuicaoResponse));
         }
     }

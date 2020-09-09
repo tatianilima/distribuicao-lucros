@@ -32,6 +32,8 @@ namespace Distribuicao.Lucros.Api
             services.AddControllers();
 
             DependencyInjections.AddInfraStructure(services, Configuration);
+            var configuration = GetConfiguration();
+            services.AddSingleton(typeof(IConfiguration), configuration);
 
             services.AddSwaggerDocument(config =>
             {
@@ -63,6 +65,13 @@ namespace Distribuicao.Lucros.Api
             {
                 endpoints.MapControllers();
             });
+        }
+        private static IConfiguration GetConfiguration()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddEnvironmentVariables();
+            return configBuilder.Build();
         }
     }
 }

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Distribuicao.Lucros.Domain\Distribuicao.Lucros.Domain.csproj" />
+    <ProjectReference Include="..\Distribuicao.Lucros.Infra.Data\Distribuicao.Lucros.Infra.Data.csproj" />
     <ProjectReference Include="..\Distribuicao.Lucros.Service\Distribuicao.Lucros.Service.csproj" />
   </ItemGroup>
 
